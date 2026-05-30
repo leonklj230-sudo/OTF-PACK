@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OTF PACK — Pack Graphique FiveM</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#d4a843;--gold-light:#f0c96a;--gold-dark:#9a7520;--black:#050507;--dark:#0c0c10;--card:#111116;--border:rgba(212,168,67,0.2);--text:#e8e0cc;--muted:#6b6458}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;overflow-x:hidden}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(212,168,67,.12) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(212,168,67,.06) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,.04) 1px,transparent 1px);background-size:60px 60px}
+.hero-line{position:absolute;top:0;left:50%;width:1px;height:100%;background:linear-gradient(180deg,transparent,rgba(212,168,67,.3),transparent)}
+.badge{position:relative;display:inline-flex;align-items:center;gap:8px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);border-radius:2px;padding:6px 16px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{position:relative;font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,15vw,140px);line-height:.9;letter-spacing:4px;color:#fff;margin-bottom:8px}
+.hero h1 span{color:var(--gold)}
+.hero-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(13px,3vw,18px);letter-spacing:6px;text-transform:uppercase;color:var(--muted);margin-bottom:40px}
+.hero-desc{max-width:480px;font-size:14px;color:rgba(232,224,204,.6);line-height:1.8;margin-bottom:40px}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:14px 36px;border:none;cursor:pointer;text-decoration:none;transition:all .2s}
+.hero-cta:hover{background:var(--gold-light)}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:10px;letter-spacing:3px;text-transform:uppercase}
+.scroll-line{width:1px;height:40px;background:linear-gradient(180deg,var(--gold),transparent);animation:scrollDown 2s ease-in-out infinite}
+@keyframes scrollDown{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.section{padding:60px 24px;max-width:860px;margin:0 auto}
+.section-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,60px);letter-spacing:2px;color:#fff;margin-bottom:14px;line-height:1}
+.form-wrap{background:var(--card);border:1px solid var(--border);padding:40px;position:relative}
+.form-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,.04);border:1px solid rgba(212,168,67,.2);color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;padding:11px 14px;outline:none;transition:border-color .2s;width:100%;appearance:none}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);background:rgba(212,168,67,.05)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--muted)}
+.form-textarea{min-height:90px;resize:vertical}
+.form-select option{background:var(--dark)}
+.chips-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;display:block}
+.chips-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
+.chip{padding:5px 13px;border:1px solid rgba(212,168,67,.2);font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .15s;user-select:none;background:transparent}
+.chip:hover{border-color:rgba(212,168,67,.5);color:var(--text)}
+.chip.on{background:rgba(212,168,67,.12);border-color:var(--gold);color:var(--gold)}
+.slider-section{margin-bottom:18px}
+.slider-row{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.slider-name{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);width:95px;flex-shrink:0}
+.slider-track{flex:1;position:relative;height:2px;background:rgba(212,168,67,.15)}
+input[type=range]{position:absolute;inset:0;width:100%;opacity:0;cursor:pointer;height:20px;top:-9px}
+.slider-fill{height:100%;background:var(--gold);pointer-events:none}
+.slider-val{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);min-width:24px;text-align:right}
+.config-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}
+.config-card{padding:11px;border:1px solid rgba(212,168,67,.15);cursor:pointer;transition:all .15s;text-align:center}
+.config-card:hover{border-color:rgba(212,168,67,.4)}
+.config-card.on{background:rgba(212,168,67,.08);border-color:var(--gold)}
+.config-card-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text)}
+.config-card.on .config-card-title{color:var(--gold)}
+.form-submit{display:flex;justify-content:flex-end;align-items:center;margin-top:28px;padding-top:22px;border-top:1px solid var(--border)}
+.btn-send{background:var(--gold);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:13px 36px;border:none;cursor:pointer;transition:all .2s}
+.btn-send:hover{background:var(--gold-light)}
+.success-msg{display:none;text-align:center;padding:48px}
+.success-icon{font-size:48px;margin-bottom:16px}
+.success-title{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold);letter-spacing:2px;margin-bottom:8px}
+.success-sub{font-size:14px;color:var(--muted)}
+footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:4px;color:var(--gold);margin-bottom:6px}
+.footer-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+
+/* ADMIN */
+#admin-panel{display:none;position:fixed;inset:0;background:var(--black);z-index:9999;overflow-y:auto;padding:40px 24px}
+.admin-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;border-bottom:1px solid var(--border);padding-bottom:20px}
+.admin-title{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:3px;color:var(--gold)}
+.admin-close{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;cursor:pointer}
+.admin-close:hover{border-color:var(--gold);color:var(--gold)}
+.admin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
+.admin-stat{background:var(--card);border:1px solid var(--border);padding:20px;text-align:center}
+.admin-stat-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold)}
+.admin-stat-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.demand-card{background:var(--card);border:1px solid var(--border);padding:20px;margin-bottom:12px;position:relative}
+.demand-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold)}
+.demand-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.demand-pseudo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:1px}
+.demand-date{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:1px;color:var(--muted)}
+.demand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:10px}
+.demand-field{font-size:12px}
+.demand-key{font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-size:11px}
+.demand-val{color:var(--text);margin-top:2px}
+.demand-notes{background:rgba(255,255,255,.03);border:1px solid rgba(212,168,67,.1);padding:10px 12px;font-size:13px;color:rgba(232,224,204,.7);line-height:1.5;margin-top:8px}
+.demand-actions{display:flex;gap:8px;margin-top:12px}
+.btn-done{background:rgba(212,168,67,.12);border:1px solid var(--gold);color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;cursor:pointer}
+.btn-del{background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.3);color:rgba(255,100,100,.8);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;cursor:pointer}
+.badge-done{background:rgba(80,200,80,.1);border:1px solid rgba(80,200,80,.3);color:rgba(100,220,100,.8);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 10px}
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase}
+
+/* LOGIN */
+#admin-login{display:none;position:fixed;inset:0;background:rgba(5,5,7,.95);z-index:9998;align-items:center;justify-content:center}
+.login-box{background:var(--card);border:1px solid var(--border);padding:40px;width:320px;text-align:center;position:relative}
+.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.login-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--gold);margin-bottom:20px}
+.login-input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(212,168,67,.2);color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;padding:11px 14px;outline:none;margin-bottom:12px;letter-spacing:3px;text-align:center}
+.login-input:focus{border-color:var(--gold)}
+.login-btn{width:100%;background:var(--gold);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:12px;border:none;cursor:pointer}
+.login-err{color:rgba(255,100,100,.8);font-size:12px;margin-top:8px;display:none;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px}
+
+@media(max-width:640px){.form-wrap{padding:20px}.form-grid{grid-template-columns:1fr}.config-grid{grid-template-columns:repeat(2,1fr)}.admin-stats{grid-template-columns:1fr}.demand-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN ADMIN -->
+<div id="admin-login" style="display:none">
+  <div class="login-box">
+    <div class="login-title">Accès Admin</div>
+    <input class="login-input" type="password" id="pwd-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPwd()">
+    <button class="login-btn" onclick="checkPwd()">Accéder →</button>
+    <div class="login-err" id="login-err">Mot de passe incorrect</div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel">
+  <div style="max-width:900px;margin:0 auto">
+    <div class="admin-header">
+      <div class="admin-title">OTF ADMIN</div>
+      <button class="admin-close" onclick="closeAdmin()">✕ Fermer</button>
+    </div>
+    <div class="admin-stats">
+      <div class="admin-stat"><div class="admin-stat-num" id="stat-total">0</div><div class="admin-stat-label">Total demandes</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="stat-pending">0</div><div class="admin-stat-label">En attente</div></div>
+      <div class="admin-stat"><div class="admin-stat-num" id="stat-done">0</div><div class="admin-stat-label">Terminées</div></div>
+    </div>
+    <div id="demands-list"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-line"></div>
+  <div class="badge">FiveM Graphic Pack</div>
+  <h1>OTF<br><span>PACK</span></h1>
+  <p class="hero-sub">Pack graphique · ReShade · QuantV · Client-Side</p>
+  <p class="hero-desc">Commande ton pack graphique personnalisé. Chaque preset est créé sur mesure selon ta config et ton style.</p>
+  <a href="#order" class="hero-cta">Commander mon pack →</a>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- FORM -->
+<section class="section" id="order">
+  <div class="section-eyebrow">Commande</div>
+  <div class="section-title">Ton pack sur mesure</div>
+  <p style="color:var(--muted);font-size:14px;margin-bottom:36px;line-height:1.7">Remplis le formulaire ci-dessous. Ta demande sera traitée et ton ReShade sera créé sous peu.</p>
+
+  <div class="form-wrap" id="form-wrap">
+    <form id="otf-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Pseudo Discord</label>
+          <input class="form-input" id="f-pseudo" type="text" placeholder="Ton pseudo Discord" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Thème principal</label>
+          <select class="form-select" id="f-theme">
+            <option value="">— Choisir un thème —</option>
+            <option>LA / Californie</option>
+            <option>Illegal Underground</option>
+            <option>Sakura / Japon</option>
+            <option>Cyberpunk / Neon</option>
+            <option>Réaliste photo</option>
+            <option>Colors 2026</option>
+            <option>Vaporwave / 80s</option>
+            <option>Film Noir</option>
+            <option>Automne</option>
+            <option>Miami Vice</option>
+            <option>Blazx Style</option>
+            <option>Autre (préciser dans les notes)</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Référence visuelle (lien vidéo ou image)</label>
+          <input class="form-input" id="f-ref" type="text" placeholder="https://youtube.com/... ou description">
+        </div>
+      </div>
+
+      <span class="chips-label">Ambiance</span>
+      <div class="chips-wrap" id="chips-ambiance">
+        <div class="chip on" onclick="chip(this)">Chaud</div>
+        <div class="chip" onclick="chip(this)">Froid</div>
+        <div class="chip" onclick="chip(this)">Sombre</div>
+        <div class="chip" onclick="chip(this)">Lumineux</div>
+        <div class="chip" onclick="chip(this)">Réaliste</div>
+        <div class="chip" onclick="chip(this)">Coloré vif</div>
+        <div class="chip" onclick="chip(this)">Désaturé</div>
+        <div class="chip" onclick="chip(this)">Contrasté</div>
+      </div>
+
+      <span class="chips-label">Couleurs dominantes</span>
+      <div class="chips-wrap" id="chips-couleurs">
+        <div class="chip" onclick="chip(this)">Orange</div>
+        <div class="chip" onclick="chip(this)">Bleu</div>
+        <div class="chip" onclick="chip(this)">Violet</div>
+        <div class="chip" onclick="chip(this)">Rose</div>
+        <div class="chip" onclick="chip(this)">Vert</div>
+        <div class="chip" onclick="chip(this)">Rouge</div>
+        <div class="chip" onclick="chip(this)">Jaune</div>
+        <div class="chip" onclick="chip(this)">Cyan</div>
+        <div class="chip" onclick="chip(this)">Neutre</div>
+        <div class="chip" onclick="chip(this)">Noir</div>
+      </div>
+
+      <span class="chips-label">Options spéciales</span>
+      <div class="chips-wrap" id="chips-options">
+        <div class="chip" onclick="chip(this)">Pluie réaliste</div>
+        <div class="chip" onclick="chip(this)">Gouttes véhicule</div>
+        <div class="chip" onclick="chip(this)">Flammes échappement</div>
+        <div class="chip" onclick="chip(this)">Fumée visible</div>
+        <div class="chip" onclick="chip(this)">Ciel étoilé</div>
+        <div class="chip" onclick="chip(this)">Aurora boréale</div>
+        <div class="chip" onclick="chip(this)">Mer transparente</div>
+        <div class="chip" onclick="chip(this)">God rays</div>
+        <div class="chip" onclick="chip(this)">Lampadaires colorés</div>
+        <div class="chip" onclick="chip(this)">Végétation automne</div>
+        <div class="chip" onclick="chip(this)">Routes mouillées</div>
+        <div class="chip" onclick="chip(this)">Blood puddles</div>
+        <div class="chip" onclick="chip(this)">Sans galaxie</div>
+        <div class="chip" onclick="chip(this)">Sans ENB</div>
+      </div>
+
+      <span class="chips-label" style="margin-bottom:10px;display:block">Réglages</span>
+      <div class="slider-section">
+        <div class="slider-row">
+          <span class="slider-name">Luminosité jour</span>
+          <div class="slider-track"><div class="slider-fill" id="fill-lj" style="width:70%"></div><input type="range" min="1" max="10" value="7" step="1" oninput="slide(this,'lj')"></div>
+          <span class="slider-val" id="val-lj">7</span>
+        </div>
+        <div class="slider-row">
+          <span class="slider-name">Luminosité nuit</span>
+          <div class="slider-track"><div class="slider-fill" id="fill-ln" style="width:40%"></div><input type="range" min="1" max="10" value="4" step="1" oninput="slide(this,'ln')"></div>
+          <span class="slider-val" id="val-ln">4</span>
+        </div>
+        <div class="slider-row">
+          <span class="slider-name">Saturation</span>
+          <div class="slider-track"><div class="slider-fill" id="fill-sat" style="width:60%"></div><input type="range" min="1" max="10" value="6" step="1" oninput="slide(this,'sat')"></div>
+          <span class="slider-val" id="val-sat">6</span>
+        </div>
+        <div class="slider-row">
+          <span class="slider-name">Contraste</span>
+          <div class="slider-track"><div class="slider-fill" id="fill-con" style="width:50%"></div><input type="range" min="1" max="10" value="5" step="1" oninput="slide(this,'con')"></div>
+          <span class="slider-val" id="val-con">5</span>
+        </div>
+      </div>
+
+      <span class="chips-label" style="margin-bottom:8px;display:block">Configuration PC</span>
+      <div class="config-grid">
+        <div class="config-card" onclick="selConfig(this)"><div class="config-card-title">Petite</div></div>
+        <div class="config-card on" onclick="selConfig(this)"><div class="config-card-title">Moyenne</div></div>
+        <div class="config-card" onclick="selConfig(this)"><div class="config-card-title">Bonne</div></div>
+        <div class="config-card" onclick="selConfig(this)"><div class="config-card-title">Haute</div></div>
+      </div>
+
+      <div class="form-grid" style="margin-top:16px">
+        <div class="form-group">
+          <label class="form-label">Couleur lampadaires</label>
+          <select class="form-select" id="f-lamps">
+            <option>Blanc pur (LED)</option>
+            <option>Orange sodium</option>
+            <option>Violet</option>
+            <option>Rouge</option>
+            <option>Vert</option>
+            <option>Cyan</option>
+            <option>Multicolore</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Style routes</label>
+          <select class="form-select" id="f-routes">
+            <option>USA / California</option>
+            <option>Europe / France</option>
+            <option>CRX Custom</option>
+            <option>Abîmées réalistes</option>
+            <option>Sans préférence</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Notes libres</label>
+          <textarea class="form-textarea" id="f-notes" placeholder="Effets, inspiration, style de serveur, demandes spéciales..."></textarea>
+        </div>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit" class="btn-send">Envoyer ma demande →</button>
+      </div>
+    </form>
+
+    <div class="success-msg" id="success">
+      <div class="success-icon">✦</div>
+      <div class="success-title">Demande envoyée !</div>
+      <p class="success-sub">Ta demande a bien été reçue. Le pack sera créé sous peu.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">OTF PACK</div>
+  <p class="footer-sub">Pack graphique FiveM · Client-Side · ReShade · QuantV</p>
+</footer>
+
+<script>
+function chip(el){el.classList.toggle('on')}
+function slide(input,id){const v=input.value;document.getElementById('val-'+id).textContent=v;document.getElementById('fill-'+id).style.width=(v/10*100)+'%'}
+function selConfig(el){document.querySelectorAll('.config-card').forEach(c=>c.classList.remove('on'));el.classList.add('on')}
+
+// STORAGE KEY
+const SK='otf_demands';
+
+function getDemands(){try{return JSON.parse(localStorage.getItem(SK))||[]}catch(e){return[]}}
+function saveDemands(d){localStorage.setItem(SK,JSON.stringify(d))}
+
+// FORM SUBMIT
+document.getElementById('otf-form').addEventListener('submit',function(e){
+  e.preventDefault();
+  const pseudo=document.getElementById('f-pseudo').value.trim();
+  if(!pseudo)return;
+  const demand={
+    id:Date.now(),
+    date:new Date().toLocaleString('fr-FR'),
+    pseudo,
+    theme:document.getElementById('f-theme').value||'Non précisé',
+    ref:document.getElementById('f-ref').value||'Aucune',
+    ambiance:[...document.querySelectorAll('#chips-ambiance .chip.on')].map(c=>c.textContent).join(', ')||'Non précisé',
+    couleurs:[...document.querySelectorAll('#chips-couleurs .chip.on')].map(c=>c.textContent).join(', ')||'Non précisé',
+    options:[...document.querySelectorAll('#chips-options .chip.on')].map(c=>c.textContent).join(', ')||'Aucune',
+    lj:document.getElementById('val-lj').textContent,
+    ln:document.getElementById('val-ln').textContent,
+    sat:document.getElementById('val-sat').textContent,
+    con:document.getElementById('val-con').textContent,
+    config:document.querySelector('.config-card.on')?.querySelector('.config-card-title')?.textContent||'Moyenne',
+    lamps:document.getElementById('f-lamps').value,
+    routes:document.getElementById('f-routes').value,
+    notes:document.getElementById('f-notes').value||'',
+    done:false
+  };
+  const demands=getDemands();
+  demands.unshift(demand);
+  saveDemands(demands);
+  document.getElementById('otf-form').style.display='none';
+  document.getElementById('success').style.display='block';
+});
+
+// ADMIN ACCESS via URL hash
+function checkHash(){
+  if(window.location.hash==='#admin-otf2026'){
+    document.getElementById('admin-login').style.display='flex';
+    window.location.hash='';
+  }
+}
+window.addEventListener('hashchange',checkHash);
+checkHash();
+
+function checkPwd(){
+  const v=document.getElementById('pwd-input').value;
+  if(v==='OTFPACK123'){
+    document.getElementById('admin-login').style.display='none';
+    openAdmin();
+  } else {
+    document.getElementById('login-err').style.display='block';
+    document.getElementById('pwd-input').value='';
+  }
+}
+
+function openAdmin(){
+  renderDemands();
+  document.getElementById('admin-panel').style.display='block';
+  document.body.style.overflow='hidden';
+}
+
+function closeAdmin(){
+  document.getElementById('admin-panel').style.display='none';
+  document.body.style.overflow='';
+}
+
+function renderDemands(){
+  const demands=getDemands();
+  const list=document.getElementById('demands-list');
+  const pending=demands.filter(d=>!d.done).length;
+  const done=demands.filter(d=>d.done).length;
+  document.getElementById('stat-total').textContent=demands.length;
+  document.getElementById('stat-pending').textContent=pending;
+  document.getElementById('stat-done').textContent=done;
+  if(!demands.length){
+    list.innerHTML='<div class="empty-state">Aucune demande pour le moment</div>';
+    return;
+  }
+  list.innerHTML=demands.map((d,i)=>`
+    <div class="demand-card" id="card-${d.id}" style="${d.done?'opacity:.5':''}">
+      <div class="demand-header">
+        <span class="demand-pseudo">${d.pseudo}</span>
+        <div style="display:flex;align-items:center;gap:10px">
+          ${d.done?'<span class="badge-done">✓ Terminé</span>':''}
+          <span class="demand-date">${d.date}</span>
+        </div>
+      </div>
+      <div class="demand-grid">
+        <div class="demand-field"><div class="demand-key">Thème</div><div class="demand-val">${d.theme}</div></div>
+        <div class="demand-field"><div class="demand-key">Config PC</div><div class="demand-val">${d.config}</div></div>
+        <div class="demand-field"><div class="demand-key">Ambiance</div><div class="demand-val">${d.ambiance}</div></div>
+        <div class="demand-field"><div class="demand-key">Couleurs</div><div class="demand-val">${d.couleurs}</div></div>
+        <div class="demand-field"><div class="demand-key">Luminosité J/N</div><div class="demand-val">${d.lj}/10 — ${d.ln}/10</div></div>
+        <div class="demand-field"><div class="demand-key">Saturation / Contraste</div><div class="demand-val">${d.sat}/10 — ${d.con}/10</div></div>
+        <div class="demand-field"><div class="demand-key">Lampadaires</div><div class="demand-val">${d.lamps}</div></div>
+        <div class="demand-field"><div class="demand-key">Routes</div><div class="demand-val">${d.routes}</div></div>
+        <div class="demand-field" style="grid-column:1/-1"><div class="demand-key">Options</div><div class="demand-val">${d.options}</div></div>
+        ${d.ref&&d.ref!='Aucune'?`<div class="demand-field" style="grid-column:1/-1"><div class="demand-key">Référence</div><div class="demand-val">${d.ref}</div></div>`:''}
+      </div>
+      ${d.notes?`<div class="demand-notes">${d.notes}</div>`:''}
+      <div class="demand-actions">
+        ${!d.done?`<button class="btn-done" onclick="markDone(${d.id})">✓ Marquer terminé</button>`:''}
+        <button class="btn-del" onclick="deleteDemand(${d.id})">✕ Supprimer</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function markDone(id){
+  const demands=getDemands();
+  const d=demands.find(d=>d.id===id);
+  if(d)d.done=true;
+  saveDemands(demands);
+  renderDemands();
+}
+
+function deleteDemand(id){
+  const demands=getDemands().filter(d=>d.id!==id);
+  saveDemands(demands);
+  renderDemands();
+}
+</script>
+</body>
+</html>
