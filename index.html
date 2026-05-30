@@ -324,30 +324,66 @@ document.getElementById('otf-form').addEventListener('submit',function(e){
   e.preventDefault();
   const pseudo=document.getElementById('f-pseudo').value.trim();
   if(!pseudo)return;
+
+  // Collecte toutes les options sélectionnées
+  const ambiance=[...document.querySelectorAll('#chips-ambiance .chip.on')].map(c=>c.textContent).join(', ')||'Non précisé';
+  const couleurs=[...document.querySelectorAll('#chips-couleurs .chip.on')].map(c=>c.textContent).join(', ')||'Non précisé';
+  const options=[...document.querySelectorAll('#chips-options .chip.on')].map(c=>c.textContent).join(', ')||'Aucune';
+  const config=document.querySelector('.config-card.on')?.querySelector('.config-card-title')?.textContent||'Moyenne';
+  const lj=document.getElementById('val-lj').textContent;
+  const ln=document.getElementById('val-ln').textContent;
+  const sat=document.getElementById('val-sat').textContent;
+  const con=document.getElementById('val-con').textContent;
+  const theme=document.getElementById('f-theme').value||'Non précisé';
+  const ref=document.getElementById('f-ref').value||'Aucune';
+  const lamps=document.getElementById('f-lamps').value;
+  const routes=document.getElementById('f-routes').value;
+  const notes=document.getElementById('f-notes').value||'';
+
+  const btn=document.getElementById('btn-submit');
+  btn.disabled=true;
+  btn.textContent='Envoi en cours...';
+
+  const formData=new FormData();
+  formData.append('access_key','0572a980-2716-4290-b9c7-9299bc3c4af4');
+  formData.append('subject','🎮 Nouvelle commande OTF Pack — '+pseudo);
+  formData.append('from_name','OTF Pack Site');
+  formData.append('Pseudo Discord',pseudo);
+  formData.append('Thème',theme);
+  formData.append('Référence',ref);
+  formData.append('Ambiance',ambiance);
+  formData.append('Couleurs dominantes',couleurs);
+  formData.append('Options spéciales',options);
+  formData.append('Luminosité jour',lj+'/10');
+  formData.append('Luminosité nuit',ln+'/10');
+  formData.append('Saturation',sat+'/10');
+  formData.append('Contraste',con+'/10');
+  formData.append('Configuration PC',config);
+  formData.append('Lampadaires',lamps);
+  formData.append('Routes',routes);
+  formData.append('Notes',notes);
+
+  // Sauvegarde aussi en local pour admin panel
   const demand={
     id:Date.now(),
     date:new Date().toLocaleString('fr-FR'),
-    pseudo,
-    theme:document.getElementById('f-theme').value||'Non précisé',
-    ref:document.getElementById('f-ref').value||'Aucune',
-    ambiance:[...document.querySelectorAll('#chips-ambiance .chip.on')].map(c=>c.textContent).join(', ')||'Non précisé',
-    couleurs:[...document.querySelectorAll('#chips-couleurs .chip.on')].map(c=>c.textContent).join(', ')||'Non précisé',
-    options:[...document.querySelectorAll('#chips-options .chip.on')].map(c=>c.textContent).join(', ')||'Aucune',
-    lj:document.getElementById('val-lj').textContent,
-    ln:document.getElementById('val-ln').textContent,
-    sat:document.getElementById('val-sat').textContent,
-    con:document.getElementById('val-con').textContent,
-    config:document.querySelector('.config-card.on')?.querySelector('.config-card-title')?.textContent||'Moyenne',
-    lamps:document.getElementById('f-lamps').value,
-    routes:document.getElementById('f-routes').value,
-    notes:document.getElementById('f-notes').value||'',
-    done:false
+    pseudo,theme,ref,ambiance,couleurs,options,lj,ln,sat,con,config,lamps,routes,notes,done:false
   };
   const demands=getDemands();
   demands.unshift(demand);
   saveDemands(demands);
-  document.getElementById('otf-form').style.display='none';
-  document.getElementById('success').style.display='block';
+
+  fetch('https://api.web3forms.com/submit',{method:'POST',body:formData})
+    .then(r=>r.json())
+    .then(d=>{
+      document.getElementById('otf-form').style.display='none';
+      document.getElementById('success').style.display='block';
+    })
+    .catch(()=>{
+      // Même si erreur réseau, on confirme car sauvé en local
+      document.getElementById('otf-form').style.display='none';
+      document.getElementById('success').style.display='block';
+    });
 });
 
 // ADMIN ACCESS via URL hash
@@ -440,3 +476,4 @@ function deleteDemand(id){
 </script>
 </body>
 </html>
+
