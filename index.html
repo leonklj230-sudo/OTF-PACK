@@ -3,522 +3,898 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OTF PACK — Pack Graphique FiveM</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<title>OTF PACK — Commande Custom</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#d4a843;--gold-light:#f0c96a;--gold-dark:#9a7520;--black:#050507;--dark:#0c0c10;--card:#111116;--border:rgba(212,168,67,0.2);--text:#e8e0cc;--muted:#6b6458}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--black);color:var(--text);font-family:'Barlow',sans-serif;overflow-x:hidden}
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(212,168,67,.12) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(212,168,67,.06) 0%,transparent 60%)}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,.04) 1px,transparent 1px);background-size:60px 60px}
-.hero-line{position:absolute;top:0;left:50%;width:1px;height:100%;background:linear-gradient(180deg,transparent,rgba(212,168,67,.3),transparent)}
-.badge{position:relative;display:inline-flex;align-items:center;gap:8px;background:rgba(212,168,67,.08);border:1px solid rgba(212,168,67,.25);border-radius:2px;padding:6px 16px;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px}
-.badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:blink 2s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.hero h1{position:relative;font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,15vw,140px);line-height:.9;letter-spacing:4px;color:#fff;margin-bottom:8px}
-.hero h1 span{color:var(--gold)}
-.hero-sub{font-family:'Barlow Condensed',sans-serif;font-size:clamp(13px,3vw,18px);letter-spacing:6px;text-transform:uppercase;color:var(--muted);margin-bottom:40px}
-.hero-desc{max-width:480px;font-size:14px;color:rgba(232,224,204,.6);line-height:1.8;margin-bottom:40px}
-.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:14px 36px;border:none;cursor:pointer;text-decoration:none;transition:all .2s}
-.hero-cta:hover{background:var(--gold-light)}
-.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--muted);font-size:10px;letter-spacing:3px;text-transform:uppercase}
-.scroll-line{width:1px;height:40px;background:linear-gradient(180deg,var(--gold),transparent);animation:scrollDown 2s ease-in-out infinite}
-@keyframes scrollDown{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-.section{padding:60px 24px;max-width:860px;margin:0 auto}
-.section-eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,60px);letter-spacing:2px;color:#fff;margin-bottom:14px;line-height:1}
-.form-wrap{background:var(--card);border:1px solid var(--border);padding:40px;position:relative}
-.form-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
-.form-group{display:flex;flex-direction:column;gap:5px}
-.form-group.full{grid-column:1/-1}
-.form-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
-.form-input,.form-select,.form-textarea{background:rgba(255,255,255,.04);border:1px solid rgba(212,168,67,.2);color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;padding:11px 14px;outline:none;transition:border-color .2s;width:100%;appearance:none}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);background:rgba(212,168,67,.05)}
-.form-input::placeholder,.form-textarea::placeholder{color:var(--muted)}
-.form-textarea{min-height:90px;resize:vertical}
-.form-select option{background:var(--dark)}
-.chips-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;display:block}
-.chips-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px}
-.chip{padding:5px 13px;border:1px solid rgba(212,168,67,.2);font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);cursor:pointer;transition:all .15s;user-select:none;background:transparent}
-.chip:hover{border-color:rgba(212,168,67,.5);color:var(--text)}
-.chip.on{background:rgba(212,168,67,.12);border-color:var(--gold);color:var(--gold)}
-.slider-section{margin-bottom:18px}
-.slider-row{display:flex;align-items:center;gap:14px;margin-bottom:10px}
-.slider-name{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);width:95px;flex-shrink:0}
-.slider-track{flex:1;position:relative;height:2px;background:rgba(212,168,67,.15)}
-input[type=range]{position:absolute;inset:0;width:100%;opacity:0;cursor:pointer;height:20px;top:-9px}
-.slider-fill{height:100%;background:var(--gold);pointer-events:none}
-.slider-val{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold);min-width:24px;text-align:right}
-.config-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:18px}
-.config-card{padding:11px;border:1px solid rgba(212,168,67,.15);cursor:pointer;transition:all .15s;text-align:center}
-.config-card:hover{border-color:rgba(212,168,67,.4)}
-.config-card.on{background:rgba(212,168,67,.08);border-color:var(--gold)}
-.config-card-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text)}
-.config-card.on .config-card-title{color:var(--gold)}
-.form-submit{display:flex;justify-content:flex-end;align-items:center;margin-top:28px;padding-top:22px;border-top:1px solid var(--border)}
-.btn-send{background:var(--gold);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:13px 36px;border:none;cursor:pointer;transition:all .2s}
-.btn-send:hover{background:var(--gold-light)}
-.success-msg{display:none;text-align:center;padding:48px}
-.success-icon{font-size:48px;margin-bottom:16px}
-.success-title{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold);letter-spacing:2px;margin-bottom:8px}
-.success-sub{font-size:14px;color:var(--muted)}
-footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center}
-.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:4px;color:var(--gold);margin-bottom:6px}
-.footer-sub{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ADMIN */
-#admin-panel{display:none;position:fixed;inset:0;background:var(--black);z-index:9999;overflow-y:auto;padding:40px 24px}
-.admin-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;border-bottom:1px solid var(--border);padding-bottom:20px}
-.admin-title{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:3px;color:var(--gold)}
-.admin-close{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;cursor:pointer}
-.admin-close:hover{border-color:var(--gold);color:var(--gold)}
-.admin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
-.admin-stat{background:var(--card);border:1px solid var(--border);padding:20px;text-align:center}
-.admin-stat-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold)}
-.admin-stat-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-.demand-card{background:var(--card);border:1px solid var(--border);padding:20px;margin-bottom:12px;position:relative}
-.demand-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold)}
-.demand-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.demand-pseudo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gold);letter-spacing:1px}
-.demand-date{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:1px;color:var(--muted)}
-.demand-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:10px}
-.demand-field{font-size:12px}
-.demand-key{font-family:'Barlow Condensed',sans-serif;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-size:11px}
-.demand-val{color:var(--text);margin-top:2px}
-.demand-notes{background:rgba(255,255,255,.03);border:1px solid rgba(212,168,67,.1);padding:10px 12px;font-size:13px;color:rgba(232,224,204,.7);line-height:1.5;margin-top:8px}
-.demand-actions{display:flex;gap:8px;margin-top:12px}
-.btn-done{background:rgba(212,168,67,.12);border:1px solid var(--gold);color:var(--gold);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;cursor:pointer}
-.btn-del{background:rgba(255,80,80,.08);border:1px solid rgba(255,80,80,.3);color:rgba(255,100,100,.8);font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;cursor:pointer}
-.badge-done{background:rgba(80,200,80,.1);border:1px solid rgba(80,200,80,.3);color:rgba(100,220,100,.8);font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 10px}
-.empty-state{text-align:center;padding:60px 20px;color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:2px;text-transform:uppercase}
+  :root {
+    --gold: #D4A843;
+    --gold-dark: #A07820;
+    --gold-light: #F0C96A;
+    --bg: #0A0A0A;
+    --bg2: #111111;
+    --bg3: #181818;
+    --bg4: #1F1F1F;
+    --border: rgba(212,168,67,0.2);
+    --border-hover: rgba(212,168,67,0.6);
+    --text: #F0EDE6;
+    --text-muted: #888;
+    --red: #E04040;
+  }
 
-/* LOGIN */
-#admin-login{display:none;position:fixed;inset:0;background:rgba(5,5,7,.95);z-index:9998;align-items:center;justify-content:center}
-.login-box{background:var(--card);border:1px solid var(--border);padding:40px;width:320px;text-align:center;position:relative}
-.login-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
-.login-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--gold);margin-bottom:20px}
-.login-input{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(212,168,67,.2);color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;padding:11px 14px;outline:none;margin-bottom:12px;letter-spacing:3px;text-align:center}
-.login-input:focus{border-color:var(--gold)}
-.login-btn{width:100%;background:var(--gold);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:12px;border:none;cursor:pointer}
-.login-err{color:rgba(255,100,100,.8);font-size:12px;margin-top:8px;display:none;font-family:'Barlow Condensed',sans-serif;letter-spacing:1px}
+  html { scroll-behavior: smooth; }
 
-@media(max-width:640px){.form-wrap{padding:20px}.form-grid{grid-template-columns:1fr}.config-grid{grid-template-columns:repeat(2,1fr)}.admin-stats{grid-template-columns:1fr}.demand-grid{grid-template-columns:1fr}}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    position: relative;
+    text-align: center;
+    padding: 60px 20px 50px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #0F0C06 0%, var(--bg) 100%);
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212,168,67,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .logo-tag {
+    display: inline-block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--gold);
+    border: 1px solid var(--border);
+    padding: 4px 16px;
+    margin-bottom: 18px;
+  }
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 10vw, 96px);
+    letter-spacing: 6px;
+    line-height: 1;
+    color: var(--text);
+  }
+  header h1 span { color: var(--gold); }
+  header p {
+    color: var(--text-muted);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 12px;
+  }
+  .header-line {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 20px auto 0;
+  }
+
+  /* LAYOUT */
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* SECTION TITLES */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 50px 0 28px;
+  }
+  .section-divider .line { flex: 1; height: 1px; background: var(--border); }
+  .section-divider h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* CARDS / BLOCKS */
+  .form-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px;
+    margin-bottom: 16px;
+  }
+  .form-block label {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .form-block .sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 16px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* INPUTS */
+  input[type="text"], textarea, select {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  input[type="text"]:focus, textarea:focus, select:focus {
+    border-color: var(--gold);
+    background: var(--bg4);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23D4A843' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+  }
+  select option { background: #1a1a1a; }
+
+  /* RADIO / CHECKBOX GRID */
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .choice-grid.two-col { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+
+  .choice-item {
+    position: relative;
+    cursor: pointer;
+  }
+  .choice-item input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .choice-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: all 0.15s;
+    cursor: pointer;
+    user-select: none;
+  }
+  .choice-item:hover .choice-label {
+    border-color: var(--border-hover);
+    background: var(--bg4);
+  }
+  .choice-item input:checked + .choice-label {
+    border-color: var(--gold);
+    background: rgba(212,168,67,0.08);
+    color: var(--gold-light);
+  }
+  .choice-dot {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--text-muted);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .choice-item input:checked + .choice-label .choice-dot {
+    border-color: var(--gold);
+    background: var(--gold);
+  }
+  .choice-dot-inner {
+    width: 5px; height: 5px;
+    background: var(--bg);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+  .choice-item input:checked + .choice-label .choice-dot-inner { opacity: 1; }
+
+  /* CHECKBOX variant */
+  .choice-item.checkbox .choice-dot { border-radius: 2px; }
+  .choice-item.checkbox input:checked + .choice-label .choice-dot-inner {
+    width: 6px; height: 4px;
+    background: none;
+    border-left: 1.5px solid var(--bg);
+    border-bottom: 1.5px solid var(--bg);
+    transform: rotate(-45deg) translateY(-1px);
+    border-radius: 0;
+    opacity: 1;
+  }
+
+  /* SLIDER */
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
+  }
+  input[type="range"] {
+    flex: 1;
+    -webkit-appearance: none;
+    height: 3px;
+    background: var(--bg4);
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    padding: 0;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px; height: 18px;
+    background: var(--gold);
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--bg);
+  }
+  .slider-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--gold);
+    min-width: 50px;
+    text-align: right;
+  }
+
+  /* MODS TABLE */
+  .mods-table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  .mods-table th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 8px 12px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .mods-table th:first-child { text-align: left; }
+  .mods-table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .mods-table td:first-child { text-align: left; font-weight: 600; font-size: 13px; }
+  .mods-table input[type="radio"] { display: none; }
+  .mods-table label.radio-dot {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .mods-table input[type="radio"]:checked + label.radio-dot {
+    border-color: var(--gold);
+    background: var(--gold);
+  }
+  .mods-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* SUBMIT */
+  .submit-section { text-align: center; padding: 50px 20px 20px; }
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--gold);
+    color: #0A0A0A;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    padding: 18px 52px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .submit-btn:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+  }
+  .submit-btn:active { transform: translateY(0); }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 32px; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--gold);
+    color: #0A0A0A;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 2px;
+    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 999;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* REQUIRED star */
+  .req { color: var(--gold); margin-left: 4px; }
+
+  /* PACK SELECTOR */
+  .pack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+  }
+  @media (max-width: 600px) { .pack-grid { grid-template-columns: 1fr; } }
+  .pack-card {
+    position: relative;
+    cursor: pointer;
+  }
+  .pack-card input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .pack-inner {
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 20px 16px;
+    background: var(--bg3);
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .pack-card:hover .pack-inner { border-color: var(--border-hover); }
+  .pack-card input:checked + .pack-inner {
+    border-color: var(--gold);
+    background: rgba(212,168,67,0.07);
+  }
+  .pack-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    color: var(--text);
+    display: block;
+  }
+  .pack-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--gold);
+    display: block;
+    margin: 4px 0 8px;
+  }
+  .pack-features {
+    font-size: 11px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    text-align: left;
+  }
+  .pack-features li { list-style: none; padding-left: 12px; position: relative; }
+  .pack-features li::before { content: '—'; position: absolute; left: 0; color: var(--gold); opacity: 0.5; }
+  .pack-card input:checked + .pack-inner .pack-name { color: var(--gold-light); }
+
+  /* SECTION SUBTITLE */
+  .sub-section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 22px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sub-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ENB note */
+  .enb-note {
+    background: rgba(212,168,67,0.06);
+    border: 1px solid rgba(212,168,67,0.2);
+    border-left: 3px solid var(--gold);
+    border-radius: 2px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 12px;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 3px;
+    background: rgba(255,255,255,0.05);
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    width: 0%;
+    transition: width 0.3s;
+  }
+
+  @media (max-width: 640px) {
+    .choice-grid { grid-template-columns: 1fr 1fr; }
+    .form-block { padding: 20px 16px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- LOGIN ADMIN -->
-<div id="admin-login" style="display:none">
-  <div class="login-box">
-    <div class="login-title">Accès Admin</div>
-    <input class="login-input" type="password" id="pwd-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPwd()">
-    <button class="login-btn" onclick="checkPwd()">Accéder →</button>
-    <div class="login-err" id="login-err">Mot de passe incorrect</div>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressBar"></div></div>
+
+<header>
+  <div class="logo-tag">COMMANDE EN LIGNE</div>
+  <h1>OTF <span>PACK</span></h1>
+  <p>Pack Graphique Sur Mesure — FiveM</p>
+  <div class="header-line"></div>
+</header>
+
+<div class="container">
+
+  <!-- PACK CHOICE -->
+  <div class="section-divider"><div class="line"></div><h2>01 — CHOIX DU PACK</h2><div class="line"></div></div>
+  <div class="form-block">
+    <label>Sélectionne ton pack <span class="req">*</span></label>
+    <div class="pack-grid">
+      <label class="pack-card">
+        <input type="radio" name="pack" value="essentiel" required>
+        <div class="pack-inner">
+          <span class="pack-name">Essentiel</span>
+          <span class="pack-price">15€</span>
+          <ul class="pack-features">
+            <li>Reshade optimisé</li>
+            <li>ENB sur mesure</li>
+            <li>8 mods inclus</li>
+            <li>Routes custom</li>
+            <li>Livraison 2–3j</li>
+          </ul>
+        </div>
+      </label>
+      <label class="pack-card">
+        <input type="radio" name="pack" value="expert">
+        <div class="pack-inner">
+          <span class="pack-name">Expert</span>
+          <span class="pack-price">24€</span>
+          <ul class="pack-features">
+            <li>Reshade personnalisé</li>
+            <li>ENB sur mesure</li>
+            <li>8 à 20 mods inclus</li>
+            <li>Routes custom</li>
+            <li>Install. en vocal</li>
+          </ul>
+        </div>
+      </label>
+      <label class="pack-card">
+        <input type="radio" name="pack" value="ultime">
+        <div class="pack-inner">
+          <span class="pack-name">Ultime</span>
+          <span class="pack-price">30€</span>
+          <ul class="pack-features">
+            <li>Reshade avancé</li>
+            <li>ENB complet</li>
+            <li>20 à 30 mods inclus</li>
+            <li>Mods exclusifs</li>
+            <li>Lights custom</li>
+          </ul>
+        </div>
+      </label>
+    </div>
   </div>
+
+  <!-- INFOS -->
+  <div class="section-divider"><div class="line"></div><h2>02 — INFOS</h2><div class="line"></div></div>
+
+  <div class="form-block">
+    <label>Pseudo Discord <span class="req">*</span></label>
+    <input type="text" name="discord" placeholder="ex: username#0000" required>
+  </div>
+
+  <div class="form-block">
+    <label>Configuration PC <span class="req">*</span></label>
+    <div class="sub">Exemple : RTX 3060, i7-8600K, 16GB RAM 3200MHz</div>
+    <input type="text" name="config" placeholder="GPU, CPU, RAM..." required>
+  </div>
+
+  <div class="form-block">
+    <label>Optimisation du pack ?</label>
+    <div class="choice-grid two-col">
+      <label class="choice-item">
+        <input type="radio" name="optim" value="oui">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Oui</div>
+      </label>
+      <label class="choice-item">
+        <input type="radio" name="optim" value="non">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Non</div>
+      </label>
+    </div>
+  </div>
+
+  <!-- RESHADE -->
+  <div class="section-divider"><div class="line"></div><h2>03 — RESHADE</h2><div class="line"></div></div>
+
+  <div class="form-block">
+    <label>Couleurs</label>
+    <div class="sub">Le Reshade améliore ton jeu visuellement. Il est conçu sur mesure selon tes préférences.</div>
+    <div class="choice-grid">
+      <label class="choice-item checkbox">
+        <input type="checkbox" name="couleur" value="chaudes">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Couleurs chaudes</div>
+      </label>
+      <label class="choice-item checkbox">
+        <input type="checkbox" name="couleur" value="froides">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Couleurs froides</div>
+      </label>
+      <label class="choice-item checkbox">
+        <input type="checkbox" name="couleur" value="melange">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Mélange chaud/froid</div>
+      </label>
+    </div>
+
+    <div class="sub-section-title">Éclairage</div>
+    <div class="choice-grid">
+      <label class="choice-item">
+        <input type="radio" name="eclairage" value="clair">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Clair</div>
+      </label>
+      <label class="choice-item">
+        <input type="radio" name="eclairage" value="sombre">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Sombre</div>
+      </label>
+      <label class="choice-item">
+        <input type="radio" name="eclairage" value="melange">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Mélange clair/sombre</div>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-block">
+    <label>Bloom</label>
+    <div class="choice-grid">
+      <label class="choice-item">
+        <input type="radio" name="bloom" value="beaucoup">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Beaucoup de bloom</div>
+      </label>
+      <label class="choice-item">
+        <input type="radio" name="bloom" value="sans">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Sans bloom</div>
+      </label>
+      <label class="choice-item">
+        <input type="radio" name="bloom" value="peu">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Un peu (juste milieu)</div>
+      </label>
+    </div>
+
+    <div class="sub-section-title">Grain</div>
+    <div class="choice-grid">
+      <label class="choice-item">
+        <input type="radio" name="grain" value="beaucoup">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Beaucoup de grain</div>
+      </label>
+      <label class="choice-item">
+        <input type="radio" name="grain" value="sans">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Sans grain</div>
+      </label>
+      <label class="choice-item">
+        <input type="radio" name="grain" value="peu">
+        <div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Un peu (juste milieu)</div>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-block">
+    <label>Mood / Ambiance du Reshade</label>
+    <div class="sub">Un style particulier ? (ex : chaleureux, sombre, cinématique, agressif…)</div>
+    <textarea name="mood" placeholder="Décris l'ambiance souhaitée..."></textarea>
+  </div>
+
+  <!-- ROUTES -->
+  <div class="section-divider"><div class="line"></div><h2>04 — ROUTES</h2><div class="line"></div></div>
+
+  <div class="form-block">
+    <label>Choix des routes</label>
+    <div class="choice-grid">
+      <label class="choice-item"><input type="radio" name="routes" value="cal-a"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Cal Roads A</div></label>
+      <label class="choice-item"><input type="radio" name="routes" value="cal-m"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Cal Roads M</div></label>
+      <label class="choice-item"><input type="radio" name="routes" value="cal-f"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Cal Roads F</div></label>
+      <label class="choice-item"><input type="radio" name="routes" value="fh5"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>FH5 Roads</div></label>
+      <label class="choice-item"><input type="radio" name="routes" value="miami"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Miami Roads</div></label>
+      <label class="choice-item"><input type="radio" name="routes" value="la"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>LA Roads</div></label>
+      <label class="choice-item"><input type="radio" name="routes" value="europe"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Europe Roads</div></label>
+      <label class="choice-item"><input type="radio" name="routes" value="german"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>German Roads</div></label>
+      <label class="choice-item"><input type="radio" name="routes" value="crx"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>CRX Roads</div></label>
+      <label class="choice-item"><input type="radio" name="routes" value="black"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Black Roads</div></label>
+    </div>
+  </div>
+
+  <!-- VEGETATION -->
+  <div class="form-block">
+    <label>Végétation</label>
+    <div class="choice-grid">
+      <label class="choice-item"><input type="radio" name="vege" value="1"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Style 1</div></label>
+      <label class="choice-item"><input type="radio" name="vege" value="2"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Style 2</div></label>
+      <label class="choice-item"><input type="radio" name="vege" value="3"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Style 3</div></label>
+      <label class="choice-item"><input type="radio" name="vege" value="4"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Style 4</div></label>
+    </div>
+  </div>
+
+  <!-- STREETLIGHTS -->
+  <div class="section-divider"><div class="line"></div><h2>05 — LAMPADAIRES</h2><div class="line"></div></div>
+
+  <div class="form-block">
+    <label>Couleur des lampadaires</label>
+    <div class="choice-grid">
+      <label class="choice-item"><input type="radio" name="lights" value="blanc-ultra-froid"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Blanc ultra froid 10 500K</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="blanc-froid"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Blanc froid 8 000K</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="natural-white"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Natural white 5 500K</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="blanc-chaud"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Blanc chaud 3 000K</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="blanc-ultra-chaud"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Blanc ultra chaud 2 200K</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="blanc-pur"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Blanc pur</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="blanc-cyanish"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Blanc cyanish</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="or"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Or</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="or-orange"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Or orange</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="or-sature"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Or (saturé)</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="rdr2"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>RDR2</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="orange"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Orange</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="neon-orange"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Neon orange</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="bleu"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Bleu</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="bleu-minuit"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Bleu minuit</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="bleu-ciel"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Bleu ciel</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="bleu-sarcelle"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Bleu sarcelle</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="aqua"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Aqua</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="sarcelle-or"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Sarcelle / Or</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="vert-capuche"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Vert (capuche)</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="vert-wasabi"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Vert (wasabi)</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="vert-mer"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Vert mer</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="violet"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Violet</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="violet-minuit"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Violet minuit</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="neon-magenta"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Neon magenta</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="vice-rose-vif"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Vice rose vif</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="vice-rose-clair"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Vice rose clair</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="eteintes"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Lumières éteintes</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="aleatoire"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Édition aléatoire</div></label>
+      <label class="choice-item"><input type="radio" name="lights" value="rouge-horreur"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Rouge (édition horreur)</div></label>
+    </div>
+
+    <div class="sub-section-title">Intensité des lampadaires</div>
+    <div class="slider-row">
+      <span style="font-size:12px;color:var(--text-muted);">10%</span>
+      <input type="range" min="10" max="100" step="10" value="70" id="intensiteSlider" name="intensite">
+      <span style="font-size:12px;color:var(--text-muted);">100%</span>
+      <span class="slider-value" id="intensiteVal">70%</span>
+    </div>
+  </div>
+
+  <!-- ENB + REFLECTIONS -->
+  <div class="section-divider"><div class="line"></div><h2>06 — ENB & VOITURE</h2><div class="line"></div></div>
+
+  <div class="form-block">
+    <label>ENB Custom</label>
+    <div class="enb-note">ENB standard inclus dans les packs Essentiel & Expert — ENB complet exclusif au Pack Ultime.</div>
+  </div>
+
+  <div class="form-block">
+    <label>Réflexion voiture</label>
+    <div class="choice-grid two-col">
+      <label class="choice-item"><input type="radio" name="reflection" value="avec"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Avec réflexion</div></label>
+      <label class="choice-item"><input type="radio" name="reflection" value="sans"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Sans réflexion</div></label>
+    </div>
+  </div>
+
+  <div class="form-block">
+    <label>Disque de freins (activé en permanence)</label>
+    <div class="choice-grid">
+      <label class="choice-item"><input type="radio" name="freins" value="sans"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Sans</div></label>
+      <label class="choice-item"><input type="radio" name="freins" value="chaud"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Chaud</div></label>
+      <label class="choice-item"><input type="radio" name="freins" value="tres-chaud"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Très chaud</div></label>
+    </div>
+  </div>
+
+  <div class="form-block">
+    <label>Sorties de pots</label>
+    <div class="choice-grid">
+      <label class="choice-item"><input type="radio" name="pots" value="feu"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Feu</div></label>
+      <label class="choice-item"><input type="radio" name="pots" value="rgb"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>RGB</div></label>
+      <label class="choice-item"><input type="radio" name="pots" value="bleu"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Bleu</div></label>
+      <label class="choice-item"><input type="radio" name="pots" value="rouge"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Rouge</div></label>
+      <label class="choice-item"><input type="radio" name="pots" value="vert"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Vert</div></label>
+    </div>
+  </div>
+
+  <!-- CIEL -->
+  <div class="section-divider"><div class="line"></div><h2>07 — CIEL</h2><div class="line"></div></div>
+
+  <div class="form-block">
+    <label>Type de ciel</label>
+    <div class="choice-grid two-col">
+      <label class="choice-item"><input type="radio" name="ciel" value="galaxy"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Galaxy & étoiles</div></label>
+      <label class="choice-item"><input type="radio" name="ciel" value="etoiles"><div class="choice-label"><div class="choice-dot"><div class="choice-dot-inner"></div></div>Seulement étoiles</div></label>
+    </div>
+  </div>
+
+  <!-- MODS -->
+  <div class="section-divider"><div class="line"></div><h2>08 — MODS</h2><div class="line"></div></div>
+
+  <div class="form-block">
+    <label>Quantité de mods</label>
+    <div class="sub">Les mods sont adaptés à ta configuration PC.</div>
+    <table class="mods-table">
+      <thead>
+        <tr>
+          <th>Type de mod</th>
+          <th>Beaucoup</th>
+          <th>Moyen</th>
+          <th>Pas beaucoup</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Améliorations des textures</td>
+          <td><input type="radio" name="mods-textures" id="mt-b" value="beaucoup"><label class="radio-dot" for="mt-b"></label></td>
+          <td><input type="radio" name="mods-textures" id="mt-m" value="moyen"><label class="radio-dot" for="mt-m"></label></td>
+          <td><input type="radio" name="mods-textures" id="mt-p" value="peu"><label class="radio-dot" for="mt-p"></label></td>
+        </tr>
+        <tr>
+          <td>Mods réalistes (sang, fumée…)</td>
+          <td><input type="radio" name="mods-realistes" id="mr-b" value="beaucoup"><label class="radio-dot" for="mr-b"></label></td>
+          <td><input type="radio" name="mods-realistes" id="mr-m" value="moyen"><label class="radio-dot" for="mr-m"></label></td>
+          <td><input type="radio" name="mods-realistes" id="mr-p" value="peu"><label class="radio-dot" for="mr-p"></label></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EXEMPLE PACKS -->
+  <div class="form-block">
+    <label>Inspiration — packs existants</label>
+    <div class="sub">Tu as vu des packs sur notre Discord qui te plaisent ? Précise-le ici.</div>
+    <textarea name="inspiration" placeholder="Décris ou nomme les packs qui t'ont inspiré..."></textarea>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-section">
+    <button class="submit-btn" onclick="handleSubmit(event)">
+      Envoyer ma commande →
+    </button>
+    <p style="color:var(--text-muted);font-size:12px;margin-top:16px;letter-spacing:1px;">
+      Tu seras contacté sur Discord après réception.
+    </p>
+  </div>
+
 </div>
 
-<!-- ADMIN PANEL -->
-<div id="admin-panel">
-  <div style="max-width:900px;margin:0 auto">
-    <div class="admin-header">
-      <div class="admin-title">OTF ADMIN</div>
-      <button class="admin-close" onclick="closeAdmin()">✕ Fermer</button>
-    </div>
-    <div class="admin-stats">
-      <div class="admin-stat"><div class="admin-stat-num" id="stat-total">0</div><div class="admin-stat-label">Total demandes</div></div>
-      <div class="admin-stat"><div class="admin-stat-num" id="stat-pending">0</div><div class="admin-stat-label">En attente</div></div>
-      <div class="admin-stat"><div class="admin-stat-num" id="stat-done">0</div><div class="admin-stat-label">Terminées</div></div>
-    </div>
-    <div id="demands-list"></div>
-  </div>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-line"></div>
-  <div class="badge">FiveM Graphic Pack</div>
-  <h1>OTF<br><span>PACK</span></h1>
-  <p class="hero-sub">Pack graphique · ReShade · QuantV · Client-Side</p>
-  <p class="hero-desc">Commande ton pack graphique personnalisé. Chaque preset est créé sur mesure selon ta config et ton style.</p>
-  <a href="#order" class="hero-cta">Commander mon pack →</a>
-  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
-</section>
-
-<!-- FORM -->
-<section class="section" id="order">
-  <div class="section-eyebrow">Commande</div>
-  <div class="section-title">Ton pack sur mesure</div>
-  <p style="color:var(--muted);font-size:14px;margin-bottom:36px;line-height:1.7">Remplis le formulaire ci-dessous. Ta demande sera traitée et ton ReShade sera créé sous peu.</p>
-
-  <div class="form-wrap" id="form-wrap">
-    <form id="otf-form">
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label">Pseudo Discord</label>
-          <input class="form-input" id="f-pseudo" type="text" placeholder="Ton pseudo Discord" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Thème principal</label>
-          <select class="form-select" id="f-theme">
-            <option value="">— Choisir un thème —</option>
-            <option>LA / Californie</option>
-            <option>Illegal Underground</option>
-            <option>Sakura / Japon</option>
-            <option>Cyberpunk / Neon</option>
-            <option>Réaliste photo</option>
-            <option>Colors 2026</option>
-            <option>Vaporwave / 80s</option>
-            <option>Film Noir</option>
-            <option>Automne</option>
-            <option>Miami Vice</option>
-            <option>Blazx Style</option>
-            <option>Autre (préciser dans les notes)</option>
-          </select>
-        </div>
-        <div class="form-group full">
-          <label class="form-label">Référence visuelle (lien vidéo ou image)</label>
-          <input class="form-input" id="f-ref" type="text" placeholder="https://youtube.com/... ou description">
-        </div>
-      </div>
-
-      <span class="chips-label">Ambiance</span>
-      <div class="chips-wrap" id="chips-ambiance">
-        <div class="chip on" onclick="chip(this)">Chaud</div>
-        <div class="chip" onclick="chip(this)">Froid</div>
-        <div class="chip" onclick="chip(this)">Sombre</div>
-        <div class="chip" onclick="chip(this)">Lumineux</div>
-        <div class="chip" onclick="chip(this)">Réaliste</div>
-        <div class="chip" onclick="chip(this)">Coloré vif</div>
-        <div class="chip" onclick="chip(this)">Désaturé</div>
-        <div class="chip" onclick="chip(this)">Contrasté</div>
-      </div>
-
-      <span class="chips-label">Couleurs dominantes</span>
-      <div class="chips-wrap" id="chips-couleurs">
-        <div class="chip" onclick="chip(this)">Orange</div>
-        <div class="chip" onclick="chip(this)">Bleu</div>
-        <div class="chip" onclick="chip(this)">Violet</div>
-        <div class="chip" onclick="chip(this)">Rose</div>
-        <div class="chip" onclick="chip(this)">Vert</div>
-        <div class="chip" onclick="chip(this)">Rouge</div>
-        <div class="chip" onclick="chip(this)">Jaune</div>
-        <div class="chip" onclick="chip(this)">Cyan</div>
-        <div class="chip" onclick="chip(this)">Neutre</div>
-        <div class="chip" onclick="chip(this)">Noir</div>
-      </div>
-
-      <span class="chips-label">Options spéciales</span>
-      <div class="chips-wrap" id="chips-options">
-        <div class="chip" onclick="chip(this)">Pluie réaliste</div>
-        <div class="chip" onclick="chip(this)">Gouttes véhicule</div>
-        <div class="chip" onclick="chip(this)">Flammes échappement</div>
-        <div class="chip" onclick="chip(this)">Fumée visible</div>
-        <div class="chip" onclick="chip(this)">Ciel étoilé</div>
-        <div class="chip" onclick="chip(this)">Aurora boréale</div>
-        <div class="chip" onclick="chip(this)">Mer transparente</div>
-        <div class="chip" onclick="chip(this)">God rays</div>
-        <div class="chip" onclick="chip(this)">Lampadaires colorés</div>
-        <div class="chip" onclick="chip(this)">Végétation automne</div>
-        <div class="chip" onclick="chip(this)">Routes mouillées</div>
-        <div class="chip" onclick="chip(this)">Galaxie activée</div>
-        <div class="chip" onclick="chip(this)">Blood puddles</div>
-        <div class="chip" onclick="chip(this)">Ragdoll réaliste</div>
-        <div class="chip" onclick="chip(this)">Blood réaliste</div>
-        <div class="chip" onclick="chip(this)">Animations d'armes</div>
-        <div class="chip" onclick="chip(this)">Végétation Sakura</div>
-        <div class="chip" onclick="chip(this)">Végétation Summer</div>
-        <div class="chip" onclick="chip(this)">Végétation Winter</div>
-        <div class="chip" onclick="chip(this)">Végétation Printemps</div>
-        <div class="chip" onclick="chip(this)">Végétation Rouge</div>
-        <div class="chip" onclick="chip(this)">Végétation Autre</div>
-        <div class="chip" onclick="chip(this)">Routes abîmées</div>
-        <div class="chip" onclick="chip(this)">Routes USA</div>
-        <div class="chip" onclick="chip(this)">Ciel dramatique</div>
-        <div class="chip" onclick="chip(this)">Reflets max</div>
-        <div class="chip" onclick="chip(this)">Fumée pneus</div>
-        <div class="chip" onclick="chip(this)">Impacts balles HD</div>
-        <div class="chip" onclick="chip(this)">Lune visible</div>
-        <div class="chip" onclick="chip(this)">Plage réaliste</div>
-        <div class="chip" onclick="chip(this)">Brouillard</div>
-      </div>
-        <div class="chip" onclick="chip(this)">Gouttes véhicule</div>
-        <div class="chip" onclick="chip(this)">Flammes échappement</div>
-        <div class="chip" onclick="chip(this)">Fumée visible</div>
-        <div class="chip" onclick="chip(this)">Ciel étoilé</div>
-        <div class="chip" onclick="chip(this)">Aurora boréale</div>
-        <div class="chip" onclick="chip(this)">Mer transparente</div>
-        <div class="chip" onclick="chip(this)">God rays</div>
-        <div class="chip" onclick="chip(this)">Lampadaires colorés</div>
-        <div class="chip" onclick="chip(this)">Végétation automne</div>
-        <div class="chip" onclick="chip(this)">Routes mouillées</div>
-        <div class="chip" onclick="chip(this)">Galaxie activée</div>
-        <div class="chip" onclick="chip(this)">Blood puddles</div>
-        
-        
-      </div>
-
-      <span class="chips-label" style="margin-bottom:10px;display:block">Réglages</span>
-      <div class="slider-section">
-        <div class="slider-row">
-          <span class="slider-name">Luminosité jour</span>
-          <div class="slider-track"><div class="slider-fill" id="fill-lj" style="width:70%"></div><input type="range" min="1" max="10" value="7" step="1" oninput="slide(this,'lj')"></div>
-          <span class="slider-val" id="val-lj">7</span>
-        </div>
-        <div class="slider-row">
-          <span class="slider-name">Luminosité nuit</span>
-          <div class="slider-track"><div class="slider-fill" id="fill-ln" style="width:40%"></div><input type="range" min="1" max="10" value="4" step="1" oninput="slide(this,'ln')"></div>
-          <span class="slider-val" id="val-ln">4</span>
-        </div>
-        <div class="slider-row">
-          <span class="slider-name">Saturation</span>
-          <div class="slider-track"><div class="slider-fill" id="fill-sat" style="width:60%"></div><input type="range" min="1" max="10" value="6" step="1" oninput="slide(this,'sat')"></div>
-          <span class="slider-val" id="val-sat">6</span>
-        </div>
-        <div class="slider-row">
-          <span class="slider-name">Contraste</span>
-          <div class="slider-track"><div class="slider-fill" id="fill-con" style="width:50%"></div><input type="range" min="1" max="10" value="5" step="1" oninput="slide(this,'con')"></div>
-          <span class="slider-val" id="val-con">5</span>
-        </div>
-              <div class="chip" onclick="chip(this)">Ragdoll réaliste</div>
-        <div class="chip" onclick="chip(this)">Blood réaliste</div>
-        <div class="chip" onclick="chip(this)">Animations d'armes</div>
-        <div class="chip" onclick="chip(this)">Végétation Sakura</div>
-        <div class="chip" onclick="chip(this)">Végétation Summer</div>
-        <div class="chip" onclick="chip(this)">Végétation Winter</div>
-        <div class="chip" onclick="chip(this)">Végétation Printemps</div>
-        <div class="chip" onclick="chip(this)">Végétation Rouge</div>
-        <div class="chip" onclick="chip(this)">Végétation Autre</div>
-        <div class="chip" onclick="chip(this)">Routes abîmées</div>
-        <div class="chip" onclick="chip(this)">Routes USA</div>
-        <div class="chip" onclick="chip(this)">Ciel dramatique</div>
-        <div class="chip" onclick="chip(this)">Reflets max</div>
-        <div class="chip" onclick="chip(this)">Fumée pneus</div>
-        <div class="chip" onclick="chip(this)">Impacts balles HD</div>
-        <div class="chip" onclick="chip(this)">Lune visible</div>
-        <div class="chip" onclick="chip(this)">Plage réaliste</div>
-        <div class="chip" onclick="chip(this)">Brouillard</div>
-      </div>
-
-      <span class="chips-label" style="margin-bottom:8px;display:block">Configuration PC</span>
-      <div class="config-grid">
-        <div class="config-card" onclick="selConfig(this)"><div class="config-card-title">Petite</div></div>
-        <div class="config-card on" onclick="selConfig(this)"><div class="config-card-title">Moyenne</div></div>
-        <div class="config-card" onclick="selConfig(this)"><div class="config-card-title">Bonne</div></div>
-        <div class="config-card" onclick="selConfig(this)"><div class="config-card-title">Haute</div></div>
-      </div>
-
-      <div class="form-grid" style="margin-top:16px">
-        <div class="form-group">
-          <label class="form-label">Couleur lampadaires</label>
-          <select class="form-select" id="f-lamps">
-            <option>Blanc pur (LED)</option>
-            <option>Orange sodium</option>
-            <option>Violet</option>
-            <option>Rouge</option>
-            <option>Vert</option>
-            <option>Cyan</option>
-            <option>Multicolore</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Style routes</label>
-          <select class="form-select" id="f-routes">
-            <option>USA / California</option>
-            <option>Europe / France</option>
-            <option>CRX Custom</option>
-            <option>Abîmées réalistes</option>
-            <option>Sans préférence</option>
-          </select>
-        </div>
-        <div class="form-group full">
-          <label class="form-label">Notes libres</label>
-          <textarea class="form-textarea" id="f-notes" placeholder="Effets, inspiration, style de serveur, demandes spéciales..."></textarea>
-        </div>
-      </div>
-
-      <div class="form-submit">
-        <button type="submit" class="btn-send">Envoyer ma demande →</button>
-      </div>
-    </form>
-
-    <div class="success-msg" id="success">
-      <div class="success-icon">✦</div>
-      <div class="success-title">Demande envoyée !</div>
-      <p class="success-sub">Ta demande a bien été reçue. Le pack sera créé sous peu.</p>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-logo">OTF PACK</div>
-  <p class="footer-sub">Pack graphique FiveM · Client-Side · ReShade · QuantV</p>
-</footer>
+<div class="toast" id="toast">✓ Commande envoyée avec succès !</div>
 
 <script>
-function chip(el){el.classList.toggle('on')}
-function slide(input,id){const v=input.value;document.getElementById('val-'+id).textContent=v;document.getElementById('fill-'+id).style.width=(v/10*100)+'%'}
-function selConfig(el){document.querySelectorAll('.config-card').forEach(c=>c.classList.remove('on'));el.classList.add('on')}
+  const slider = document.getElementById('intensiteSlider');
+  const sliderVal = document.getElementById('intensiteVal');
+  slider.addEventListener('input', () => sliderVal.textContent = slider.value + '%');
 
-// STORAGE KEY
-const SK='otf_demands';
-
-function getDemands(){try{return JSON.parse(localStorage.getItem(SK))||[]}catch(e){return[]}}
-function saveDemands(d){localStorage.setItem(SK,JSON.stringify(d))}
-
-// FORM SUBMIT
-document.getElementById('otf-form').addEventListener('submit',function(e){
-  e.preventDefault();
-  const pseudo=document.getElementById('f-pseudo').value.trim();
-  if(!pseudo)return;
-
-  const ambiance=[...document.querySelectorAll('#chips-ambiance .chip.on')].map(c=>c.textContent).join(', ')||'Non précisé';
-  const couleurs=[...document.querySelectorAll('#chips-couleurs .chip.on')].map(c=>c.textContent).join(', ')||'Non précisé';
-  const options=[...document.querySelectorAll('#chips-options .chip.on')].map(c=>c.textContent).join(', ')||'Aucune';
-  const config=document.querySelector('.config-card.on')?.querySelector('.config-card-title')?.textContent||'Moyenne';
-  const lj=document.getElementById('val-lj').textContent;
-  const ln=document.getElementById('val-ln').textContent;
-  const sat=document.getElementById('val-sat').textContent;
-  const con=document.getElementById('val-con').textContent;
-  const theme=document.getElementById('f-theme').value||'Non précisé';
-  const ref=document.getElementById('f-ref').value||'Aucune';
-  const lamps=document.getElementById('f-lamps').value;
-  const routes=document.getElementById('f-routes').value;
-  const notes=document.getElementById('f-notes').value||'';
-
-  const btn=document.getElementById('btn-submit');
-  btn.disabled=true;
-  btn.textContent='Envoi en cours...';
-
-  // Sauvegarde locale pour panel admin
-  const demand={id:Date.now(),date:new Date().toLocaleString('fr-FR'),pseudo,theme,ref,ambiance,couleurs,options,lj,ln,sat,con,config,lamps,routes,notes,done:false};
-  const demands=getDemands();
-  demands.unshift(demand);
-  saveDemands(demands);
-
-  // Envoi Formspree
-  fetch('https://formspree.io/f/xjgzdyvr',{
-    method:'POST',
-    headers:{'Accept':'application/json','Content-Type':'application/json'},
-    body:JSON.stringify({
-      'Pseudo Discord':pseudo,
-      'Thème':theme,
-      'Référence':ref,
-      'Ambiance':ambiance,
-      'Couleurs':couleurs,
-      'Options':options,
-      'Luminosité Jour':lj+'/10',
-      'Luminosité Nuit':ln+'/10',
-      'Saturation':sat+'/10',
-      'Contraste':con+'/10',
-      'Configuration PC':config,
-      'Lampadaires':lamps,
-      'Routes':routes,
-      'Notes':notes
-    })
-  })
-  .then(r=>r.json())
-  .then(d=>{
-    document.getElementById('otf-form').style.display='none';
-    document.getElementById('success').style.display='block';
-  })
-  .catch(()=>{
-    document.getElementById('otf-form').style.display='none';
-    document.getElementById('success').style.display='block';
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight) * 100;
+    document.getElementById('progressBar').style.width = Math.round(scrolled) + '%';
   });
-});
 
-// ADMIN ACCESS via URL hash
-function checkHash(){
-  if(window.location.hash==='#admin-otf2026'){
-    document.getElementById('admin-login').style.display='flex';
-    window.location.hash='';
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const packVal = document.querySelector('input[name="pack"]:checked');
+    const discordVal = document.querySelector('input[name="discord"]').value.trim();
+    if (!packVal) { alert('Sélectionne un pack avant de continuer.'); return; }
+    if (!discordVal) { alert('Entre ton pseudo Discord.'); return; }
+
+    const get = (name) => {
+      const el = document.querySelector(`input[name="${name}"]:checked`);
+      return el ? el.value : '—';
+    };
+    const getChecks = (name) => {
+      const els = document.querySelectorAll(`input[name="${name}"]:checked`);
+      return els.length ? [...els].map(e => e.value).join(', ') : '—';
+    };
+    const getText = (name) => {
+      const el = document.querySelector(`input[name="${name}"], textarea[name="${name}"]`);
+      return el && el.value.trim() ? el.value.trim() : '—';
+    };
+
+    const packEmoji = { essentiel: '🥉', expert: '🥈', ultime: '🏆' };
+    const pack = packVal.value;
+
+    const embed = {
+      embeds: [{
+        title: `${packEmoji[pack] || '📦'} Nouvelle commande — Pack ${pack.charAt(0).toUpperCase() + pack.slice(1)}`,
+        color: 0xD4A843,
+        fields: [
+          { name: '👤 Discord', value: discordVal, inline: true },
+          { name: '📦 Pack choisi', value: pack.charAt(0).toUpperCase() + pack.slice(1), inline: true },
+          { name: '⚙️ Config PC', value: getText('config'), inline: false },
+          { name: '🔧 Optimisation', value: get('optim'), inline: true },
+          { name: '🎨 Couleurs Reshade', value: getChecks('couleur'), inline: true },
+          { name: '💡 Éclairage', value: get('eclairage'), inline: true },
+          { name: '✨ Bloom', value: get('bloom'), inline: true },
+          { name: '📽️ Grain', value: get('grain'), inline: true },
+          { name: '🎭 Mood / Ambiance', value: getText('mood'), inline: false },
+          { name: '🛣️ Routes', value: get('routes'), inline: true },
+          { name: '🌿 Végétation', value: get('vege'), inline: true },
+          { name: '💡 Couleur lampadaires', value: get('lights'), inline: true },
+          { name: '🔆 Intensité lampadaires', value: document.getElementById('intensiteSlider').value + '%', inline: true },
+          { name: '🚗 Réflexion voiture', value: get('reflection'), inline: true },
+          { name: '🔥 Disque de freins', value: get('freins'), inline: true },
+          { name: '💨 Sorties de pots', value: get('pots'), inline: true },
+          { name: '🌌 Ciel', value: get('ciel'), inline: true },
+          { name: '🎛️ Mods textures', value: get('mods-textures'), inline: true },
+          { name: '🎛️ Mods réalistes', value: get('mods-realistes'), inline: true },
+          { name: '💬 Inspiration', value: getText('inspiration'), inline: false },
+        ],
+        footer: { text: 'OTF Pack — Formulaire de commande' },
+        timestamp: new Date().toISOString()
+      }]
+    };
+
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = 'Envoi en cours...';
+    btn.style.opacity = '0.7';
+    btn.style.pointerEvents = 'none';
+
+    try {
+      const res = await fetch('https://discord.com/api/webhooks/1511824223994253416/0ol3E0taLXt_namgdD5ed86HMDPWL7_8zHBJhHTFd-wvUboS7QQu_BFa8SW-RzfJXmJJ', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(embed)
+      });
+      if (res.ok) {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+        btn.textContent = '✓ Commande envoyée';
+        btn.style.background = '#2ecc71';
+      } else {
+        throw new Error('Erreur webhook');
+      }
+    } catch (err) {
+      btn.textContent = '✕ Erreur — réessaie';
+      btn.style.background = '#e04040';
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+      setTimeout(() => {
+        btn.textContent = 'Envoyer ma commande →';
+        btn.style.background = '';
+        btn.style.opacity = '1';
+        btn.style.pointerEvents = 'auto';
+      }, 3000);
+    }
   }
-}
-window.addEventListener('hashchange',checkHash);
-checkHash();
-
-function checkPwd(){
-  const v=document.getElementById('pwd-input').value;
-  if(v==='OTFPACK123'){
-    document.getElementById('admin-login').style.display='none';
-    openAdmin();
-  } else {
-    document.getElementById('login-err').style.display='block';
-    document.getElementById('pwd-input').value='';
-  }
-}
-
-function openAdmin(){
-  renderDemands();
-  document.getElementById('admin-panel').style.display='block';
-  document.body.style.overflow='hidden';
-}
-
-function closeAdmin(){
-  document.getElementById('admin-panel').style.display='none';
-  document.body.style.overflow='';
-}
-
-function renderDemands(){
-  const demands=getDemands();
-  const list=document.getElementById('demands-list');
-  const pending=demands.filter(d=>!d.done).length;
-  const done=demands.filter(d=>d.done).length;
-  document.getElementById('stat-total').textContent=demands.length;
-  document.getElementById('stat-pending').textContent=pending;
-  document.getElementById('stat-done').textContent=done;
-  if(!demands.length){
-    list.innerHTML='<div class="empty-state">Aucune demande pour le moment</div>';
-    return;
-  }
-  list.innerHTML=demands.map((d,i)=>`
-    <div class="demand-card" id="card-${d.id}" style="${d.done?'opacity:.5':''}">
-      <div class="demand-header">
-        <span class="demand-pseudo">${d.pseudo}</span>
-        <div style="display:flex;align-items:center;gap:10px">
-          ${d.done?'<span class="badge-done">✓ Terminé</span>':''}
-          <span class="demand-date">${d.date}</span>
-        </div>
-      </div>
-      <div class="demand-grid">
-        <div class="demand-field"><div class="demand-key">Thème</div><div class="demand-val">${d.theme}</div></div>
-        <div class="demand-field"><div class="demand-key">Config PC</div><div class="demand-val">${d.config}</div></div>
-        <div class="demand-field"><div class="demand-key">Ambiance</div><div class="demand-val">${d.ambiance}</div></div>
-        <div class="demand-field"><div class="demand-key">Couleurs</div><div class="demand-val">${d.couleurs}</div></div>
-        <div class="demand-field"><div class="demand-key">Luminosité J/N</div><div class="demand-val">${d.lj}/10 — ${d.ln}/10</div></div>
-        <div class="demand-field"><div class="demand-key">Saturation / Contraste</div><div class="demand-val">${d.sat}/10 — ${d.con}/10</div></div>
-        <div class="demand-field"><div class="demand-key">Lampadaires</div><div class="demand-val">${d.lamps}</div></div>
-        <div class="demand-field"><div class="demand-key">Routes</div><div class="demand-val">${d.routes}</div></div>
-        <div class="demand-field" style="grid-column:1/-1"><div class="demand-key">Options</div><div class="demand-val">${d.options}</div></div>
-        ${d.ref&&d.ref!='Aucune'?`<div class="demand-field" style="grid-column:1/-1"><div class="demand-key">Référence</div><div class="demand-val">${d.ref}</div></div>`:''}
-      </div>
-      ${d.notes?`<div class="demand-notes">${d.notes}</div>`:''}
-      <div class="demand-actions">
-        ${!d.done?`<button class="btn-done" onclick="markDone(${d.id})">✓ Marquer terminé</button>`:''}
-        <button class="btn-del" onclick="deleteDemand(${d.id})">✕ Supprimer</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function markDone(id){
-  const demands=getDemands();
-  const d=demands.find(d=>d.id===id);
-  if(d)d.done=true;
-  saveDemands(demands);
-  renderDemands();
-}
-
-function deleteDemand(id){
-  const demands=getDemands().filter(d=>d.id!==id);
-  saveDemands(demands);
-  renderDemands();
-}
 </script>
 </body>
 </html>
+
 
